@@ -178,9 +178,25 @@ internal class CropOverlay: UIView {
 				case cornerButtons[0]:	// Top Left
                     newFrame = CGRect(x: frame.origin.x + newTranslation.x, y: frame.origin.y + newTranslation.y, width: frame.size.width - newTranslation.x, height: frame.size.height - newTranslation.y)
 				case cornerButtons[1]:	// Top Right
-					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width + newTranslation.x, height: frame.size.height - newTranslation.y)
+          if constrainProportions == true {
+            if abs(translation.x) > abs(translation.y) {
+              newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width + newTranslation.x, height: frame.size.height + newTranslation.y)
+            } else {
+              newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width - newTranslation.x, height: frame.size.height - newTranslation.y)
+            }
+          } else {
+            newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width + newTranslation.x, height: frame.size.height - newTranslation.y)
+          }
 				case cornerButtons[2]:	// Bottom Left
-					newFrame = CGRect(x: frame.origin.x + newTranslation.x, y: frame.origin.y, width: frame.size.width - newTranslation.x, height: frame.size.height + newTranslation.y)
+          if constrainProportions == true {
+            if abs(translation.x) > abs(translation.y) {
+              newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width - newTranslation.x, height: frame.size.height - newTranslation.y)
+            } else {
+              newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width + newTranslation.x, height: frame.size.height + newTranslation.y)
+            }
+          } else {
+            newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width - newTranslation.x, height: frame.size.height + newTranslation.y)
+          }
 				case cornerButtons[3]:	// Bottom Right
 					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width + newTranslation.x, height: frame.size.height + newTranslation.y)
 				default:
