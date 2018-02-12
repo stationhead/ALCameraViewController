@@ -36,6 +36,7 @@ internal class CropOverlay: UIView {
 
     var isResizable: Bool = false
     var isMovable: Bool = false
+    var constrainProportions: Bool = false
     var minimumSize: CGSize = CGSize.zero
 
     internal override init(frame: CGRect) {
@@ -171,15 +172,17 @@ internal class CropOverlay: UIView {
 				
 				var newFrame: CGRect
 				
+        let maxPoint: CGFloat = abs(translation.x) > abs(translation.y) ? translation.x : translation.y
+        let newTranslation = constrainProportions == true ? CGPoint(x: maxPoint, y: maxPoint) : translation
 				switch button {
 				case cornerButtons[0]:	// Top Left
-                    newFrame = CGRect(x: frame.origin.x + translation.x, y: frame.origin.y + translation.y, width: frame.size.width - translation.x, height: frame.size.height - translation.y)
+                    newFrame = CGRect(x: frame.origin.x + newTranslation.x, y: frame.origin.y + newTranslation.y, width: frame.size.width - newTranslation.x, height: frame.size.height - newTranslation.y)
 				case cornerButtons[1]:	// Top Right
-					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + translation.y, width: frame.size.width + translation.x, height: frame.size.height - translation.y)
+					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y + newTranslation.y, width: frame.size.width + newTranslation.x, height: frame.size.height - newTranslation.y)
 				case cornerButtons[2]:	// Bottom Left
-					newFrame = CGRect(x: frame.origin.x + translation.x, y: frame.origin.y, width: frame.size.width - translation.x, height: frame.size.height + translation.y)
+					newFrame = CGRect(x: frame.origin.x + newTranslation.x, y: frame.origin.y, width: frame.size.width - newTranslation.x, height: frame.size.height + newTranslation.y)
 				case cornerButtons[3]:	// Bottom Right
-					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width + translation.x, height: frame.size.height + translation.y)
+					newFrame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width + newTranslation.x, height: frame.size.height + newTranslation.y)
 				default:
 					newFrame = CGRect.zero
 				}

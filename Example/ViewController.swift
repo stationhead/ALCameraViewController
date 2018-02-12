@@ -14,10 +14,11 @@ class ViewController: UIViewController {
     var croppingEnabled: Bool = false
     var allowResizing: Bool = true
     var allowMoving: Bool = false
+    var constrainProportions: Bool = false
     var minimumSize: CGSize = CGSize(width: 60, height: 60)
 
     var croppingParameters: CroppingParameters {
-        return CroppingParameters(isEnabled: croppingEnabled, allowResizing: allowResizing, allowMoving: allowMoving, minimumSize: minimumSize)
+      return CroppingParameters(isEnabled: croppingEnabled, allowResizing: allowResizing, allowMoving: allowMoving, constrainProportions: constrainProportions, minimumSize: minimumSize)
     }
     
     @IBOutlet weak var imageView: UIImageView!

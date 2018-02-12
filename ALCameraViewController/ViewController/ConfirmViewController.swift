@@ -22,6 +22,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
         didSet {
             cropOverlay.isResizable = croppingParameters.allowResizing
             cropOverlay.minimumSize = croppingParameters.minimumSize
+            cropOverlay.constrainProportions = croppingParameters.constrainProportions
         }
     }
 
@@ -71,6 +72,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
         cropOverlay.isHidden = true
         cropOverlay.isResizable = croppingParameters.allowResizing
         cropOverlay.isMovable = croppingParameters.allowMoving
+        cropOverlay.constrainProportions = croppingParameters.constrainProportions
         cropOverlay.minimumSize = croppingParameters.minimumSize
 
 		let spinner = showSpinner()

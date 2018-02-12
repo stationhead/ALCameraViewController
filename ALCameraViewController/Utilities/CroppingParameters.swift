@@ -22,6 +22,7 @@ public struct CroppingParameters {
     /// Default value is set to false.
     var allowMoving: Bool
 
+   var constrainProportions: Bool
     /// Prevent the user to resize the cropping area below a minimum size.
     /// Default value is (60, 60). Below this value, corner buttons will overlap.
     var minimumSize: CGSize
@@ -29,10 +30,12 @@ public struct CroppingParameters {
     public init(isEnabled: Bool = false,
                 allowResizing: Bool = true,
                 allowMoving: Bool = true,
+                constrainProportions: Bool = false,
          minimumSize: CGSize = CGSize(width: 60, height: 60)) {
 
         self.isEnabled = isEnabled
         self.allowResizing = allowResizing
+        self.constrainProportions = constrainProportions
         self.allowMoving = allowMoving
         self.minimumSize = minimumSize
     }
