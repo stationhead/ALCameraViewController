@@ -99,6 +99,18 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
 		}
 	}
 	
+	override public func viewDidAppear(_ animated: Bool) {
+	    super.viewDidAppear(animated)
+	    guard croppingParameters.minimumSize.width != croppingParameters.minimumSize.height else {return}
+	    let center = cropOverlay.center
+	    cropOverlay.frame = CGRect(x: 0, y: 0, width: croppingParameters.minimumSize.width * 3, height: croppingParameters.minimumSize.height * 3)
+	    cropOverlay.center = center
+	    cropOverlay.layoutSubviews()
+	    UIView.animate(withDuration: 0.15) {
+	      self.cropOverlay.alpha = 1
+	    }
+  	}
+	
 	public override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		let scale = calculateMinimumScale(view.frame.size)
@@ -148,6 +160,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
 	
 	private func configureWithImage(_ image: UIImage) {
 		cropOverlay.isHidden = !croppingParameters.isEnabled
+		cropOverlay.alpha = croppingParameters.minimumSize.width == croppingParameters.minimumSize.height ? 1 : 0
 		
 		buttonActions()
 		
