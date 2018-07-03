@@ -103,7 +103,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
 	    super.viewDidAppear(animated)
 	    guard croppingParameters.minimumSize.width != croppingParameters.minimumSize.height else {return}
 	    let center = cropOverlay.center
-	    let width = imageView.frame.width + 60
+	    let width = imageView.frame.width
 	    cropOverlay.frame = CGRect(x: 0, y: 0, width: width, height: width * croppingParameters.minimumSize.height/croppingParameters.minimumSize.width)
 	    cropOverlay.center = center
 	    cropOverlay.layoutSubviews()
